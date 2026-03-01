@@ -1,0 +1,17 @@
+.applicant-container {
+  background: #f0f2f5;
+  padding: 24px;
+}
+
+.applicant-container h1 {
+  color: #1890ff;
+  margin-bottom: 24px;
+}
+
+.applicant-details {
+  line-height: 2;
+}
+
+.applicant-details p {
+  margin: 8px 0;
+}

@@ -1,0 +1,16 @@
+.program-container {
+  background: #f0f2f5;
+  padding: 24px;
+}
+
+.program-container h1 {
+  color: #1890ff;
+  margin-bottom: 24px;
+}
+
+.quota-input-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}

@@ -1,0 +1,9 @@
+.institution-container {
+  background: #f0f2f5;
+  padding: 24px;
+}
+
+.institution-container h1 {
+  color: #1890ff;
+  margin-bottom: 24px;
+}
