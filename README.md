@@ -2,7 +2,7 @@
 
 A comprehensive web-based admission management system for colleges to manage programs, quotas, applicants, and seat allocation with real-time tracking.
 
-## 🎯 Features
+##  Features
 
 ### Master Setup
 - Institution, Campus, and Department management
@@ -44,7 +44,7 @@ A comprehensive web-based admission management system for colleges to manage pro
 - User creation and management
 - Institution-level user assignment
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 - React.js
@@ -63,15 +63,15 @@ A comprehensive web-based admission management system for colleges to manage pro
 - Socket.IO (Real-time Communication)
 - bcrypt.js (Password Hashing)
 
-## 📋 Prerequisites
+##  Prerequisites
 
 - Node.js (v14 or higher)
 - MongoDB (v4.4 or higher)
 - npm or yarn
 
-## 🚀 Installation & Setup
+##  Installation & Setup
 
-### ⚠️ IMPORTANT: After Deployment
+###  IMPORTANT: After Deployment
 
 If you deployed to production and login fails, you need to create the admin user first!
 
@@ -137,7 +137,7 @@ node fix-academic-year-index.js
 
 This fixes the academic year unique index to allow same year across different institutions.
 
-## 👤 Default Login Credentials
+##  Default Login Credentials
 
 After running `node seed.js`, use these credentials:
 
@@ -147,7 +147,7 @@ Password: admin123
 Role: Admin
 ```
 
-## 📖 User Roles & Permissions
+## User Roles & Permissions
 
 ### Admin
 - Full system access
@@ -170,7 +170,7 @@ Role: Admin
 - Monitor admission progress
 - No create/edit permissions
 
-## 🔄 Typical Workflow
+##  Typical Workflow
 
 ### 1. System Setup (Admin)
 1. Login as admin
@@ -192,15 +192,15 @@ Role: Admin
 2. Monitor seat filling progress
 3. Track pending documents/fees
 
-## 🔑 Key System Rules
+##  Key System Rules
 
-1. ✅ Quota seats cannot exceed total intake
-2. ✅ No seat allocation if quota is full
-3. ✅ Admission number generated only once (immutable)
-4. ✅ Admission confirmed only if fee is paid
-5. ✅ Real-time seat counters update automatically
+1.  Quota seats cannot exceed total intake
+2.  No seat allocation if quota is full
+3.  Admission number generated only once (immutable)
+4. Admission confirmed only if fee is paid
+5. Real-time seat counters update automatically
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 admission-management-system/
@@ -226,7 +226,7 @@ admission-management-system/
 └── README.md            # This file
 ```
 
-## 🌐 API Endpoints
+ API Endpoints
 
 ### Authentication
 - `POST /api/auth/login` - User login
@@ -260,7 +260,7 @@ admission-management-system/
 ### Dashboard
 - `GET /api/dashboard` - Get dashboard statistics
 
-## 🤖 AI Assistance Disclosure
+## AI Assistance Disclosure
 
 This project was developed with assistance from Kiro AI Assistant for:
 - Bug fixes and error resolution
@@ -279,7 +279,7 @@ Self-implemented areas:
 - Dashboard statistics and visualizations
 - Authentication and authorization system
 
-## 🐛 Known Issues & Solutions
+## Known Issues & Solutions
 
 ### Issue: "rawData.some is not a function"
 **Solution**: Already fixed with safe array handling in all components.
@@ -290,7 +290,7 @@ Self-implemented areas:
 node server/fix-academic-year-index.js
 ```
 
-## 📝 Testing
+## Testing
 
 ### Manual Testing Checklist
 - [ ] Admin can create institution, campus, department
@@ -303,7 +303,7 @@ node server/fix-academic-year-index.js
 - [ ] Dashboard shows correct statistics
 - [ ] Real-time updates work
 
-## 🚀 Deployment
+##  Deployment
 
 See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
 
@@ -313,15 +313,15 @@ Quick summary:
 3. Use MongoDB Atlas for database
 4. Update environment variables
 
-## 📄 License
+## License
 
 This project is for educational/assessment purposes.
 
-## 👨‍💻 Author
+Author
 
 [Your Name]
 
-## 📞 Support
+ Support
 
 For issues or questions, please contact [your-email@example.com]
 
