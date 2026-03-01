@@ -36,6 +36,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/admission
 
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/setup', require('./routes/setupRoutes')); // ONE-TIME SETUP
 app.use('/api/institution', require('./routes/institutionRoutes'));
 app.use('/api/program', require('./routes/programRoutes'));
 app.use('/api/applicant', require('./routes/applicantRoutes'));

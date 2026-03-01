@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Admin User - One Time Setup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #5568d3;
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            display: none;
+        }
+        
+        .result.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            display: block;
+        }
+        
+        .result.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            display: block;
+        }
+        
+        .credentials {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+        
+        .credentials p {
+            margin: 5px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .note {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 One-Time Admin Setup</h1>
+        <p class="subtitle">Create the initial admin user for your Admission Management System</p>
+        
+        <div class="warning">
+            ⚠️ <strong>Important:</strong> This is a one-time setup. After creating the admin user, this route will be automatically disabled.
+        </div>
+        
+        <form id="setupForm">
+            <div class="form-group">
+                <label for="apiUrl">Backend API URL</label>
+                <input 
+                    type="url" 
+                    id="apiUrl" 
+                    placeholder="https://your-backend.onrender.com"
+                    required
+                >
+            </div>
+            
+            <button type="submit" id="submitBtn">Create Admin User</button>
+        </form>
+        
+        <div id="result" class="result"></div>
+        
+        <div class="note">
+            <strong>📝 Note:</strong> The admin credentials will be:
+            <div class="credentials">
+                <p><strong>Email:</strong> admin@college.com</p>
+                <p><strong>Password:</strong> admin123</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('setupForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const resultDiv = document.getElementById('result');
+        const apiUrlInput = document.getElementById('apiUrl');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const apiUrl = apiUrlInput.value.trim();
+            
+            if (!apiUrl) {
+                showResult('Please enter your backend API URL', 'error');
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Creating Admin User...';
+            resultDiv.style.display = 'none';
+            
+            try {
+                const response = await fetch(`${apiUrl}/api/seed`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult(
+                        `✅ Success! Admin user created successfully.<br><br>
+                        <strong>Login Credentials:</strong><br>
+                        Email: ${data.credentials.email}<br>
+                        Password: ${data.credentials.password}<br><br>
+                        You can now login to your application!`,
+                        'success'
+                    );
+                } else {
+                    showResult(`❌ ${data.message}`, 'error');
+                }
+            } catch (error) {
+                showResult(
+                    `❌ Error: ${error.message}<br><br>
+                    Please check:<br>
+                    1. Your backend URL is correct<br>
+                    2. Your backend server is running<br>
+                    3. CORS is properly configured`,
+                    'error'
+                );
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Create Admin User';
+            }
+        });
+        
+        function showResult(message, type) {
+            resultDiv.innerHTML = message;
+            resultDiv.className = `result ${type}`;
+            resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
